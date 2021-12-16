@@ -9,7 +9,8 @@ import {
 } from '../controllers/tag'
 
 const router = express.Router()
-router.use(checkToken)
+// TOKEN DESABILITADO PARA TESTES //
+// router.use(checkToken)
 
 router.post('/create-tag', createTag) // CRIAR tag
 

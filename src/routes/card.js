@@ -9,7 +9,8 @@ import {
 } from '../controllers/card'
 
 const router = express.Router()
-router.use(checkToken)
+// TOKEN DESABILITADO PARA TESTES //
+// router.use(checkToken)
 
 router.post('/create-card', createCard) // CRIAR CARD
 

@@ -28,7 +28,13 @@ export const viewCard = async (req, res) => {
     // FUNÇÃO QUE IDENTIFICA SE OS CAMPOS OBRIGATÓRIOS FORAM PREENCHIDOS //
     let id = parseInt(req.query.id)
     
-    if(Number.isInteger(id)){
+    if(Number.isInteger(id) && id === 0){
+        const query = `select * from cards`
+        const data = await sequelize.query(query, { type: sequelize.QueryTypes.SELECT})
+
+        res.status(200).send({ success: true, message: "Sucess", data: data})
+    
+    } else if(Number.isInteger(id)) {
         const data = await Card.findByPk(id)
 
         if (data) {
@@ -36,7 +42,7 @@ export const viewCard = async (req, res) => {
         } else {
             res.status(200).send({ success: false, message: "Not Found", res: { data } })
         }
-    } else{
+    } else {
         res.status(200).send({ success: false, message: "É necessário informar o 'id' do card dentro dos parâmetros", data: null})
     }
 

@@ -37,7 +37,13 @@ export const viewTag = async (req, res) => {
     // IDENTIFICA SE O ID É UM NÚMERO INTEIRO //
     let id = parseInt(req.query.id)
     
-    if(Number.isInteger(id)){
+    if(Number.isInteger(id) && id === 0){
+        const query = `select * from tags`
+        const data = await sequelize.query(query, { type: sequelize.QueryTypes.SELECT})
+
+        res.status(200).send({ success: true, message: "Sucess", data: data})
+
+    } else if(Number.isInteger(id)) {
         const data = await Tag.findByPk(id)
 
         if (data) {
